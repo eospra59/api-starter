@@ -16,6 +16,16 @@ water = pygame.Surface([32, 30]).convert()
 water.blit(img, (0, 0), (0, 17, 32, 30))
 pit = pygame.Surface([32, 30]).convert()
 pit.blit(img, (0, 0), (240, 370, 32, 30))
+
+row = []
+for j in range(25):
+    tempRow = []
+    for i in range(25):
+        num = random.randint(0, 2)
+        tempRow.append(num)
+    row.append(tempRow)
+    
+
 run = True
 while run:
     for event in pygame.event.get():
@@ -24,18 +34,38 @@ while run:
 
     win.fill((0, 0, 0))
 
-    row = [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), 0, 2, 0, 1, 0, 0, 2, 0, 1, 2, 0, 0, 0, 1, 0, 2, 2, 0, 0, 0, 0, 1, 0, 2, 1, 1, 1, 0, 0, 2, 1, 1, 2, 0, 0, 0, 2, 2, 1, 1, 1, 0, 0, 0, 0, 2, 1]
-   
-    row = [
-        [1, 1, 1, 1], 
-        [0, 0, 0, 1], 
-        [2, 2, 2, 2], 
-        [1, 2, 2, 1]
-    ]
+    # row = [
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)]
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)], 
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)], 
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)],
+    #     [random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2), random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2),random.randint(0, 2)]
+        
+    # ]
+
 
 
     for i in range(25):
-        for j in range(20):
+        for j in range(25):
             if row[i][j] == 0:
                 win.blit(grass, (i * 32, j * 30))
             if row[i][j] == 1:
