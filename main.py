@@ -29,6 +29,11 @@ stone = pygame.Surface([32, 30]).convert()
 stone.blit(img, (0, 0), (128, 355, 32, 30))
 stump = pygame.Surface([32, 30]).convert()
 stump.blit(treeimg, (0, 0), (0, 195, 32, 30))
+trap = pygame.Surface([32, 30]).convert()
+trap.blit(caveimg, (0, 0), (130, 10, 32, 30))
+box = pygame.Surface([32, 30]).convert()
+box.blit(img, (0, 0), (560, 130, 32, 30))
+
 
 
 row = []
@@ -225,6 +230,43 @@ while run:
             if timer >= 0.5:
                 print('too late')
                 timer = 0  
+
+    if ter == "dungeon":
+        for i in range(25):
+            for j in range(25):
+                if row[i][j] == 0:
+                    win.blit(pit, (i * 32, j * 30))
+                if row[i][j] == 1:
+                    win.blit(wood, (i * 32, j * 30))
+                if row[i][j] == 2:
+                    win.blit(box, (i * 32, j * 30))
+                if row[i][j] == 3:
+                    win.blit(wood, (i * 32, j * 30))
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                if timer == 0:  # First mouse click.
+                    timer = 0.001  # Start the timer.
+                    # Set the x, y postions of the mouse click
+                    x, y = event.pos
+                    i = x // 32
+                    j = y // 30
+                    row[i][j] = 1
+                    # Click again before 0.5 seconds to double click.
+                elif timer < 0.5:
+                    x, y = event.pos
+                    i = x // 32
+                    j = y // 30
+                    row[i][j] = 2
+                    timer = 0
+        # Increase timer after mouse was pressed the first time.
+        if timer != 0:
+            timer += dt
+            # Reset after 0.5 seconds.
+            if timer >= 0.5:
+                print('too late')
+                timer = 0  
+
+
     pygame.display.update()
 
 pygame.quit()
