@@ -47,7 +47,50 @@ for j in range(25):
 ter = input("What type of terrain would you like?")
 timer = 0
 dt = 0
+a = 0
+b = 0
+c = 0
+d = 0
+m = 0 
+w = 0
 
+def build():
+   for i in range(25):
+            for j in range(25):
+                if row[i][j] == 0:
+                    win.blit(a, (i * 32, j * 30))
+                if row[i][j] == 1:
+                    win.blit(b, (i * 32, j * 30))
+                if row[i][j] == 2:
+                    win.blit(c, (i * 32, j * 30))
+                if row[i][j] == 3:
+                    win.blit(d, (i * 32, j * 30)) 
+
+def edit():
+    global timer
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.button == 1:
+            if timer == 0:  # First mouse click.
+                timer = 0.001  # Start the timer.
+                # Set the x, y postions of the mouse click
+                x, y = event.pos
+                i = x // 32
+                j = y // 30
+                row[i][j] = m
+                # Click again before 0.5 seconds to double click.
+            elif timer < 0.5:
+                x, y = event.pos
+                i = x // 32
+                j = y // 30
+                row[i][j] = w
+                timer = 0
+        # Increase timer after mouse was pressed the first time.
+        if timer != 0:
+            timer += dt
+            # Reset after 0.5 seconds.
+            if timer >= 0.5:
+                print('too late')
+                timer = 0
 
 run = True
 while run:
@@ -56,216 +99,67 @@ while run:
             run = False
 
     win.fill((0, 0, 0))
-
+    
     if ter == "ocean":
-        for i in range(25):
-            for j in range(25):
-                if row[i][j] == 0:
-                    win.blit(water, (i * 32, j * 30))
-                if row[i][j] == 1:
-                    win.blit(water, (i * 32, j * 30))
-                if row[i][j] == 2:
-                    win.blit(rock, (i * 32, j * 30))
-                if row[i][j] == 3:
-                    win.blit(water, (i * 32, j * 30))
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if timer == 0:  # First mouse click.
-                    timer = 0.001  # Start the timer.
-                    # Set the x, y postions of the mouse click
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 1
-                    # Click again before 0.5 seconds to double click.
-                elif timer < 0.5:
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 2
-                    timer = 0
-        # Increase timer after mouse was pressed the first time.
-        if timer != 0:
-            timer += dt
-            # Reset after 0.5 seconds.
-            if timer >= 0.5:
-                print('too late')
-                timer = 0
+        a = water
+        b = water
+        c = rock
+        d = water
+        build()
+        m = 1
+        w = 2
+        edit()
+
 
     if ter == "forest":
-        for i in range(25):
-            for j in range(25):
-                if row[i][j] == 0:
-                    win.blit(grass, (i * 32, j * 30))
-                if row[i][j] == 1:
-                    win.blit(tree, (i * 32, j * 30))
-                if row[i][j] == 2:
-                    win.blit(tree, (i * 32, j * 30))
-                if row[i][j] == 3:
-                    win.blit(tree, (i * 32, j * 30))    
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if timer == 0:  # First mouse click.
-                    timer = 0.001  # Start the timer.
-                    # Set the x, y postions of the mouse click
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 0
-                    # Click again before 0.5 seconds to double click.
-                elif timer < 0.5:
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 2
-                    timer = 0
-        # Increase timer after mouse was pressed the first time.
-        if timer != 0:
-            timer += dt
-            # Reset after 0.5 seconds.
-            if timer >= 0.5:
-                print('too late')
-                timer = 0
+        a = grass
+        b = tree
+        c = tree
+        d = tree
+        build()
+        m = 0
+        w = 2
+        edit()
+        
     if ter == "desert":
-        for i in range(25):
-            for j in range(25):
-                if row[i][j] == 0:
-                    win.blit(rock2, (i * 32, j * 30))
-                if row[i][j] == 1:
-                    win.blit(dirt, (i * 32, j * 30))
-                if row[i][j] == 2:
-                    win.blit(dirt, (i * 32, j * 30))
-                if row[i][j] == 3:
-                    win.blit(dirt, (i * 32, j * 30))
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if timer == 0:  # First mouse click.
-                    timer = 0.001  # Start the timer.
-                    # Set the x, y postions of the mouse click
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 1
-                    # Click again before 0.5 seconds to double click.
-                elif timer < 0.5:
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 0
-                    timer = 0
-        # Increase timer after mouse was pressed the first time.
-        if timer != 0:
-            timer += dt
-            # Reset after 0.5 seconds.
-            if timer >= 0.5:
-                print('too late')
-                timer = 0  
+        a = rock2
+        b = dirt
+        c = dirt
+        d = dirt
+        build()
+        m = 1
+        w = 0
+        edit()
 
     if ter == "town":
-        for i in range(25):
-            for j in range(25):
-                if row[i][j] == 0:
-                    win.blit(hut, (i * 32, j * 30))
-                if row[i][j] == 1:
-                    win.blit(stone, (i * 32, j * 30))
-                if row[i][j] == 2:
-                    win.blit(tree, (i * 32, j * 30))
-                if row[i][j] == 3:
-                    win.blit(stone, (i * 32, j * 30))
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if timer == 0:  # First mouse click.
-                    timer = 0.001  # Start the timer.
-                    # Set the x, y postions of the mouse click
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 1
-                    # Click again before 0.5 seconds to double click.
-                elif timer < 0.5:
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 0
-                    timer = 0
-        # Increase timer after mouse was pressed the first time.
-        if timer != 0:
-            timer += dt
-            # Reset after 0.5 seconds.
-            if timer >= 0.5:
-                print('too late')
-                timer = 0 
+        a = hut
+        b = stone
+        c = tree
+        d = stone
+        build()
+        m = 1
+        w = 0
+        edit()
 
     if ter == "fields":
-        for i in range(25):
-            for j in range(25):
-                if row[i][j] == 0:
-                    win.blit(grass, (i * 32, j * 30))
-                if row[i][j] == 1:
-                    win.blit(grass, (i * 32, j * 30))
-                if row[i][j] == 2:
-                    win.blit(stump, (i * 32, j * 30))
-                if row[i][j] == 3:
-                    win.blit(grass, (i * 32, j * 30))
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if timer == 0:  # First mouse click.
-                    timer = 0.001  # Start the timer.
-                    # Set the x, y postions of the mouse click
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 1
-                    # Click again before 0.5 seconds to double click.
-                elif timer < 0.5:
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 0
-                    timer = 0
-        # Increase timer after mouse was pressed the first time.
-        if timer != 0:
-            timer += dt
-            # Reset after 0.5 seconds.
-            if timer >= 0.5:
-                print('too late')
-                timer = 0  
-
+        a = grass
+        b = grass
+        c = stump
+        d = grass
+        build()
+        m = 1
+        w = 0
+        edit()
+        
     if ter == "dungeon":
-        for i in range(25):
-            for j in range(25):
-                if row[i][j] == 0:
-                    win.blit(pit, (i * 32, j * 30))
-                if row[i][j] == 1:
-                    win.blit(wood, (i * 32, j * 30))
-                if row[i][j] == 2:
-                    win.blit(box, (i * 32, j * 30))
-                if row[i][j] == 3:
-                    win.blit(wood, (i * 32, j * 30))
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if timer == 0:  # First mouse click.
-                    timer = 0.001  # Start the timer.
-                    # Set the x, y postions of the mouse click
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 1
-                    # Click again before 0.5 seconds to double click.
-                elif timer < 0.5:
-                    x, y = event.pos
-                    i = x // 32
-                    j = y // 30
-                    row[i][j] = 2
-                    timer = 0
-        # Increase timer after mouse was pressed the first time.
-        if timer != 0:
-            timer += dt
-            # Reset after 0.5 seconds.
-            if timer >= 0.5:
-                print('too late')
-                timer = 0  
-
+        a = pit
+        b = wood
+        c = box
+        d = wood
+        build()
+        m = 1
+        w = 2
+        edit()
 
     pygame.display.update()
 
