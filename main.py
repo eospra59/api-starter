@@ -6,6 +6,7 @@ img = pygame.image.load('assets/gfx/Overworld.png').convert()
 caveimg = pygame.image.load('assets/gfx/cave.png').convert()
 treeimg = pygame.image.load('assets/gfx/objects.png').convert()
 
+pygame.font.init()
 
 grass = pygame.Surface([32, 30]).convert()
 grass.blit(img, (0, 0), (0, 145, 32, 30))
@@ -43,8 +44,8 @@ for j in range(25):
         num = random.randint(0, 3)
         tempRow.append(num)
     row.append(tempRow)
-    
-ter = input("What type of terrain would you like?")
+
+ter = 0  
 timer = 0
 dt = 0
 a = 0
@@ -54,6 +55,9 @@ d = 0
 m = 0 
 w = 0
 
+BLUE = (0, 0, 100)
+CYAN = (0, 100, 0)
+black = (0, 0, 0)
 def build():
    for i in range(25):
             for j in range(25):
@@ -92,6 +96,39 @@ def edit():
                 print('too late')
                 timer = 0
 
+def text_objects(text, font):
+    textSurface = font.render(text, True, BLUE)
+    return textSurface, textSurface.get_rect()
+
+def button (msg, x, y, w, h, ic, ac, action=None ):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    
+    if (x+w > mouse[0] > x) and (y+h > mouse[1] > y):
+        pygame.draw.rect(win, CYAN, (x, y, w, h))
+        if (click[0] == 1 and action != None):
+            if  (action == "Ocean"):
+                ter = "ocean"
+            elif  (action == "Forest"):
+                ter = "forest"
+            elif  (action == "Desert"):
+                ter = "desert"
+            elif  (action == "Town"):
+                ter = "town"
+            elif  (action == "Fields"):
+                ter = "fields"
+            elif  (action == "Dungeon"):
+                ter = "dungeon"
+
+    else:
+        pygame.draw.rect(win, BLUE, (x, y, w, h))
+        smallText = pygame.font.Font("freesansbold.ttf", 20)
+        textSurf, textRect = text_objects(msg, smallText)
+        textRect.center = ( (x+(w/2)), (y+(h/2)) )
+        win.blit(textSurf, textRect)
+
+button("Ocean", 0, 50, 100, 50, BLUE, CYAN, action="Ocean")
+
 run = True
 while run:
     for event in pygame.event.get():
@@ -99,7 +136,7 @@ while run:
             run = False
 
     win.fill((0, 0, 0))
-    
+
     if ter == "ocean":
         a = water
         b = water
