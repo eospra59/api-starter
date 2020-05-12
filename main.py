@@ -56,7 +56,7 @@ m = 0
 w = 0
 
 BLUE = (0, 0, 100)
-CYAN = (0, 100, 0)
+CYAN = (100, 100, 100)
 black = (0, 0, 0)
 def build():
    for i in range(25):
@@ -128,6 +128,11 @@ def button (msg, x, y, w, h, ic, ac, action=None ):
         win.blit(textSurf, textRect)
 
 button("Ocean", 0, 50, 100, 50, BLUE, CYAN, action="Ocean")
+button("Forest", 100, 50, 100, 50, BLUE, CYAN, action="Forest")
+button("Desert", 200, 50, 100, 50, BLUE, CYAN, action="Desert")
+button("Town", 300, 50, 100, 50, BLUE, CYAN, action="Town")
+button("Fields", 500, 50, 100, 50, BLUE, CYAN, action="Fields")
+button("Dungeon", 500, 50, 100, 50, BLUE, CYAN, action="Dungeon")
 
 run = True
 while run:
