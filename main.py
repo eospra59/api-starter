@@ -55,7 +55,7 @@ d = 0
 m = 0 
 w = 0
 
-BLUE = (0, 0, 100)
+BLUE = (0, 40, 40)
 CYAN = (100, 100, 100)
 black = (0, 0, 0)
 def build():
@@ -103,9 +103,13 @@ def text_objects(text, font):
 def button (msg, x, y, w, h, ic, ac, action=None ):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
-    
+    global ter
     if (x+w > mouse[0] > x) and (y+h > mouse[1] > y):
         pygame.draw.rect(win, CYAN, (x, y, w, h))
+        smallText = pygame.font.Font("freesansbold.ttf", 20)
+        textSurf, textRect = text_objects(msg, smallText)
+        textRect.center = ( (x+(w/2)), (y+(h/2)) )
+        win.blit(textSurf, textRect)
         if (click[0] == 1 and action != None):
             if  (action == "Ocean"):
                 ter = "ocean"
@@ -127,12 +131,6 @@ def button (msg, x, y, w, h, ic, ac, action=None ):
         textRect.center = ( (x+(w/2)), (y+(h/2)) )
         win.blit(textSurf, textRect)
 
-button("Ocean", 0, 50, 100, 50, BLUE, CYAN, action="Ocean")
-button("Forest", 100, 50, 100, 50, BLUE, CYAN, action="Forest")
-button("Desert", 200, 50, 100, 50, BLUE, CYAN, action="Desert")
-button("Town", 300, 50, 100, 50, BLUE, CYAN, action="Town")
-button("Fields", 500, 50, 100, 50, BLUE, CYAN, action="Fields")
-button("Dungeon", 500, 50, 100, 50, BLUE, CYAN, action="Dungeon")
 
 run = True
 while run:
@@ -141,6 +139,13 @@ while run:
             run = False
 
     win.fill((0, 0, 0))
+
+    button("Ocean", 50, 50, 100, 50, BLUE, CYAN, action="Ocean")
+    button("Forest", 170, 50, 100, 50, BLUE, CYAN, action="Forest")
+    button("Desert", 290, 50, 100, 50, BLUE, CYAN, action="Desert")
+    button("Town", 410, 50, 100, 50, BLUE, CYAN, action="Town")
+    button("Fields", 530, 50, 100, 50, BLUE, CYAN, action="Fields")
+    button("Dungeon", 650, 50, 100, 50, BLUE, CYAN, action="Dungeon")
 
     if ter == "ocean":
         a = water
